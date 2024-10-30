@@ -15,6 +15,8 @@ local defaultElitismHelperDBValues = {
 	EndOfDungeonMessage = true
 }
 
+local addonName, addonTable = ...;
+
 local OutputModes = {
 	["default"] = 0,
 	["party"] = 1,
@@ -1928,8 +1930,10 @@ SlashCmdList["ELITISMHELPER"] = function(msg,editBox)
 	local commandFunction = actions[cmd]
 	if not commandFunction then
 		commandFunction = actions["help"]
+		InterfaceOptionsFrame_OpenToCategory(addonTable.UIPanel);
 	end
 	commandFunction(args)
+	addonTable.UIPanel:refreshValues();
 end
 
 function ElitismFrame:RebuildTable()
